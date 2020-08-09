@@ -105,7 +105,7 @@ Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 
 Layout/SpaceInsideStringInterpolation:
-  EnforcedStyle: space
+  EnforcedStyle: no_space
 
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
@@ -120,7 +120,7 @@ Layout/LineLength:
   Max: 120
 
 Metrics/AbcSize:
-  Max: 20
+  Max: 15
 
 Metrics/MethodLength:
   Max: 18

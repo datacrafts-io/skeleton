@@ -28,7 +28,7 @@ module DatacraftsIoSkeleton
     map %w[-v --version] => :version
     # Informs user about gem version.
     def version
-      say "datacrafts-io-skeleton #{ DatacraftsIoSkeleton::VERSION }"
+      say "datacrafts-io-skeleton #{DatacraftsIoSkeleton::VERSION}"
     end
   end
 end

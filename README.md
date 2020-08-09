@@ -12,6 +12,8 @@ Install this gem as follow:
 
 ### New Rails API application without frontend part.
 
+This command will create new rails app with configured rails_helper.rb and .rubocop.yml files. All major gems are also included.
+
     $ datacrafts-io-skeleton create APP_NAME
     $ datacrafts-io-skeleton build APP_NAME
     $ datacrafts-io-skeleton new APP_NAME
@@ -25,7 +27,6 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at [datacrafts-io/skeleton](https://github.com/datacrafts-io/skeleton). This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/datacrafts-io/skeleton/blob/master/CODE_OF_CONDUCT.md).
-
 
 ## License
 

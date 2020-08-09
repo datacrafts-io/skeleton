@@ -35,7 +35,7 @@ module DatacraftsIoSkeleton
 
     no_commands do
       def create_rails_api_app
-        run "rails new #{ @app_name } --database=postgresql --api -T -m #{ TEMPLATES_DIR }/rails.rb"
+        run "rails new #{@app_name} --database=postgresql --api -T -m #{TEMPLATES_DIR}/rails.rb"
       end
 
       def configure_rubocop
@@ -51,16 +51,16 @@ module DatacraftsIoSkeleton
       end
 
       def run_rubocop
-        run "cd #{ app } && rubocop -a"
+        run "cd #{app} && rubocop -a"
       end
 
       def commit_project
         append_to_file app(".gitignore"), "/.idea/\n"
-        run "cd #{ app } && git add . && git commit -m 'Initial commit.'"
+        run "cd #{app} && git add . && git commit -m 'Initial commit.'"
       end
 
       def app(path=nil)
-        "#{ @app_name }/#{ path }"
+        "#{@app_name}/#{path}"
       end
     end
   end

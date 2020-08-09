@@ -23,12 +23,8 @@ Style/Lambda:
 Style/Documentation:
   Enabled: false
 
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
 Style/ReturnNil:
   Enabled: true
-
 
 Style/SymbolArray:
   MinSize: 5
@@ -118,7 +114,7 @@ Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 
 Layout/SpaceInsideStringInterpolation:
-  EnforcedStyle: space
+  EnforcedStyle: no_space
 
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
@@ -141,24 +137,24 @@ Layout/LineLength:
   Max: 120
 
 Metrics/AbcSize:
-  Max: 20
+  Max: 15
   Exclude:
-    - "test/**/*"
+    - "spec/**/*"
 
 Metrics/BlockLength:
   Exclude:
     - "config/**/*"
-    - "test/**/*"
+    - "spec/**/*"
 
 Metrics/ClassLength:
   Exclude:
-    - "test/**/*"
+    - "spec/**/*"
 
 Metrics/MethodLength:
   Max: 18
   Exclude:
     - "db/migrate/*"
-    - "test/**/*"
+    - "spec/**/*"
 
 Performance/Casecmp:
   Enabled: false
