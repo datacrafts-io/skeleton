@@ -1,9 +1,10 @@
 require "thor"
+require_relative "./helpers"
 
 module DatacraftsIoSkeleton
   # Responsible for the creation of rails projects.
   class RailsCreator < Thor
-    include Thor::Actions
+    include Helpers
 
     # Defines gem templates folder which you can use to load template to the new app.
     TEMPLATES_DIR = (File.dirname(__FILE__) + "/../../templates").freeze
@@ -28,6 +29,7 @@ module DatacraftsIoSkeleton
         update_spec_config
         run_rubocop
         commit_project
+        say("Rails API part has built.")
       end
     end
 
@@ -55,12 +57,8 @@ module DatacraftsIoSkeleton
       end
 
       def commit_project
-        append_to_file app(".gitignore"), "/.idea/\n"
-        run "cd #{app} && git add . && git commit -m 'Initial commit.'"
-      end
-
-      def app(path=nil)
-        "#{@app_name}/#{path}"
+        append_to_file app(".gitignore"), "/.idea/"
+        commit("Initial commit.")
       end
     end
   end
