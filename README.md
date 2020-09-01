@@ -17,6 +17,14 @@ This command will create new rails app with configured rails_helper.rb and .rubo
     $ datacrafts-io-skeleton create APP_NAME
     $ datacrafts-io-skeleton build APP_NAME
     $ datacrafts-io-skeleton new APP_NAME
+    
+### With frontend part.
+
+You can specify `--frontend (-f) FRONTEND_TYPE` option to additionally create frontend application inside `APP_NAME/frontend` directory. Use `-t` option to add typescript support.
+
+    $ datacrafts-io-skeleton create APP_NAME --frontend react -t 
+
+Allowed frontend types include only `react` for now.
 
 ## Development
 
