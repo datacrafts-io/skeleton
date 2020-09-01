@@ -7,8 +7,8 @@ module DatacraftsIoSkeleton
   # Defines all CLI commands, their descriptions, params and aliases.
   class Composer < Thor
     FRONTEND_CREATORS = {
-      "react" => ->(app_name) { ReactCreator.new(app_name).call },
-      nil => ->(app_name) { puts("The frontend is not specified for #{app_name}") }
+      "react" => ->(app_name, options) { ReactCreator.new(app_name, options).call },
+      nil => proc { |app_name| puts("The frontend is not specified for #{app_name}") }
     }.freeze
     ALLOWED_FRONTEND = FRONTEND_CREATORS.keys.freeze
 
@@ -30,15 +30,16 @@ module DatacraftsIoSkeleton
       Additionally creates frontend client app, you can choose one type from the list: 
       #{ALLOWED_FRONTEND.compact.join(', ')}.
     DESC
+    option :typescipt, type: :boolean, aliases: [:t], desc: "Adds typescript support to frontend application."
     map %w[new build] => :create
     # Creates new app.
     #
     # @param [String] app_name  The name of app you are going to create.
     def create(app_name)
-      say("The specified frontend is not allowed") && return unless specified_frontend_valid?
+      say("The specified frontend is not allowed", :red) && return unless specified_frontend_valid?
 
       DatacraftsIoSkeleton::RailsCreator.new(app_name).call
-      FRONTEND_CREATORS[options[:frontend]].call(app_name)
+      FRONTEND_CREATORS[options[:frontend]].call(app_name, options)
     end
 
     desc "version", "Display version"

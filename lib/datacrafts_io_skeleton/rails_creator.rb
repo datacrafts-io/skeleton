@@ -5,10 +5,6 @@ module DatacraftsIoSkeleton
   # Responsible for the creation of rails projects.
   class RailsCreator < Thor
     include Helpers
-
-    # Defines gem templates folder which you can use to load template to the new app.
-    TEMPLATES_DIR = (File.dirname(__FILE__) + "/../../templates").freeze
-
     source_root TEMPLATES_DIR
 
     no_commands do
@@ -29,7 +25,7 @@ module DatacraftsIoSkeleton
         update_spec_config
         run_rubocop
         commit_project
-        say("Rails API part has built.")
+        say("Rails API part has built.", :green)
       end
     end
 
@@ -53,7 +49,7 @@ module DatacraftsIoSkeleton
       end
 
       def run_rubocop
-        run "cd #{app} && rubocop -a"
+        run "cd #{app} && bundle exec rubocop -A"
       end
 
       def commit_project
