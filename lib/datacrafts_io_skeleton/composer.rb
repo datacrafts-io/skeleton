@@ -2,12 +2,14 @@ require "thor"
 require_relative "./version"
 require_relative "./rails_creator"
 require_relative "./react_creator"
+require_relative "./vue_creator"
 
 module DatacraftsIoSkeleton
   # Defines all CLI commands, their descriptions, params and aliases.
   class Composer < Thor
     FRONTEND_CREATORS = {
       "react" => ->(app_name, options) { ReactCreator.new(app_name, options).call },
+      "vue" => ->(app_name, options) { VueCreator.new(app_name, options).call },
       nil => proc { |app_name| puts("The frontend is not specified for #{app_name}") }
     }.freeze
     ALLOWED_FRONTEND = FRONTEND_CREATORS.keys.freeze
