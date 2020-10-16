@@ -4,7 +4,7 @@ module DatacraftsIoSkeleton
   # Shared logic.
   module Helpers
     # Defines gem templates folder which you can use to load template to the new app.
-    TEMPLATES_DIR = (File.dirname(__FILE__) + "/../../templates").freeze
+    TEMPLATES_DIR = "#{File.dirname(__FILE__)}/../../templates".freeze
 
     def self.included(klass)
       klass.class_eval do
