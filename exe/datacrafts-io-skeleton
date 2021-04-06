@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby
-
-require "datacrafts_io_skeleton"
-
-DatacraftsIoSkeleton::Composer.start(ARGV)

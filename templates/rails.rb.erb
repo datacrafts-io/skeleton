@@ -1,0 +1,19 @@
+<%= Gemfiler.render(:common) %>
+
+gem_group :development do
+  <%= Gemfiler.render(:development) %>
+end
+
+gem_group :development, :test do
+  <%= Gemfiler.render(:development_test) %>
+end
+
+gem_group :test do
+  <%= Gemfiler.render(:test) %>
+end
+
+<% if Gemfiler.uncommented_default_gems.any? %>
+  uncomment_lines "Gemfile", <%= Gemfiler.uncommented_default_gems.map { |i| "\"#{i}\"" }.join(", ") %>
+<% end %>
+
+run "bundle install"
