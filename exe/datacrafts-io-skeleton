@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "datacrafts_io_skeleton"
+
+DatacraftsIoSkeleton::Composer.start(ARGV)
