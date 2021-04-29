@@ -1,10 +1,12 @@
 PATH
   remote: .
   specs:
-    datacrafts-io-skeleton (1.0.0)
+    datacrafts-io-skeleton (0.2.0)
       bundler (~> 2.2.16)
+      paint (~> 2.2.1)
       rails (~> 6.1.3)
       thor (~> 1.0.1)
+      whirly (~> 0.2.6)
 
 GEM
   remote: https://rubygems.org/
@@ -70,6 +72,7 @@ GEM
       zeitwerk (~> 2.3)
     ast (2.4.2)
     builder (3.2.4)
+    coderay (1.1.3)
     concurrent-ruby (1.1.8)
     crass (1.0.6)
     diff-lcs (1.4.4)
@@ -88,11 +91,17 @@ GEM
     mini_mime (1.0.3)
     minitest (5.14.4)
     nio4r (2.5.7)
+    nokogiri (1.11.3-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.11.3-x86_64-linux)
       racc (~> 1.4)
+    paint (2.2.1)
     parallel (1.20.1)
     parser (3.0.1.0)
       ast (~> 2.4.1)
+    pry (0.14.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
     racc (1.5.2)
     rack (2.2.3)
     rack-test (1.1.0)
@@ -162,20 +171,24 @@ GEM
     thor (1.0.1)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    unicode-display_width (2.0.0)
+    unicode-display_width (1.7.0)
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    whirly (0.2.6)
+      unicode-display_width (~> 1.1)
     zeitwerk (2.4.2)
 
 PLATFORMS
+  x86_64-darwin-19
   x86_64-linux
 
 DEPENDENCIES
   datacrafts-io-skeleton!
+  pry (~> 0.14.1)
   rake (~> 13.0)
   rspec (~> 3.0)
-  rubocop
+  rubocop (~> 1.13.0)
 
 BUNDLED WITH
    2.2.16

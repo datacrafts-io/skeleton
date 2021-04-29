@@ -4,16 +4,16 @@ module DatacraftsIoSkeleton
   module Extensions
     module Rails
       class DryInitializer
-        include ExtensionBase
+        include Base
 
-        use_option_name "dry-initializer"
+        use_option_name "dry-initializer", aliases: :i
 
         use_possible_values default: true, type: :boolean
 
         use_desc "Adds dry-initializer to your config"
 
         before :rails do
-          Gemfiler.add("dry-initializer")
+          Tools::Gemfiler.add("dry-initializer")
         end
 
         after :rails do

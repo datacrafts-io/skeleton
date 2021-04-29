@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
-require "datacrafts_io_skeleton/version"
-require "datacrafts_io_skeleton/config"
-require "datacrafts_io_skeleton/gemfiler"
-require "datacrafts_io_skeleton/extension_base"
-require "datacrafts_io_skeleton/extensions"
-require "datacrafts_io_skeleton/helpers"
+require "pry"
 require "thor"
+require "whirly"
+require "datacrafts_io_skeleton/version"
+require "datacrafts_io_skeleton/helpers"
+require "datacrafts_io_skeleton/config"
+require "datacrafts_io_skeleton/thor_object"
+require "datacrafts_io_skeleton/extensions"
+require "datacrafts_io_skeleton/options_extractor"
 
-%w[containers extractors extensions creators].each do |folder|
+%w[containers extensions tools creators].each do |folder|
   Dir[File.join(__dir__, "datacrafts_io_skeleton", folder, "**", "*.rb")].sort.each { |f| require f }
 end
 
@@ -18,9 +20,14 @@ module DatacraftsIoSkeleton
     include OptionsExtractor
     include Helpers
 
-    desc "create", "Create you own best rails+js app"
+    desc "create APP_NAME", "Create you own best Rails/JS app"
+
     def create(app_name)
-      CreatorsContainer.new(app_name, options).call
+      say "Skeleton in creating your best Rails/JS application \n"
+
+      Whirly.start spinner: "bouncingBall", color_change_rate: 0, color: "blue" do
+        CreatorsContainer.new(app_name, options).call
+      end
     end
   end
 end

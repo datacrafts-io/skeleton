@@ -9,7 +9,7 @@ module DatacraftsIoSkeleton
 
       private
 
-      def extract_extensions_recursive(klass, acc = [])
+      def extract_extensions_recursive(klass, acc=[])
         klass.constants(false).each do |name|
           ext = klass.const_get(name)
           if ext.instance_of?(Module)

@@ -1,19 +1,19 @@
-<%= DatacraftsIoSkeleton::Gemfiler.render(:common) %>
+<%= Tools::Gemfiler.render(:common) %>
 
 gem_group :development do
-  <%= DatacraftsIoSkeleton::Gemfiler.render(:development) %>
+  <%= Tools::Gemfiler.render(:development) %>
 end
 
 gem_group :development, :test do
-  <%= DatacraftsIoSkeleton::Gemfiler.render(:development_test) %>
+  <%= Tools::Gemfiler.render(:development_test) %>
 end
 
 gem_group :test do
-  <%= DatacraftsIoSkeleton::Gemfiler.render(:test) %>
+  <%= Tools::Gemfiler.render(:test) %>
 end
 
-<% if DatacraftsIoSkeleton::Gemfiler.uncommented_default_gems.any? %>
-  uncomment_lines "Gemfile", <%= DatacraftsIoSkeleton::Gemfiler.uncommented_default_gems.map { |i| "\"#{i}\"" }.join(", ") %>
+<% if Tools::Gemfiler.uncommented_default_gems.any? %>
+  uncomment_lines "Gemfile", <%= Tools::Gemfiler.uncommented_default_gems.map { |i| "\"#{i}\"" }.join(", ") %>
 <% end %>
 
 run "bundle install"

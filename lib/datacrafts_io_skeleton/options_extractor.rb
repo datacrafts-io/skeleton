@@ -6,22 +6,21 @@ module DatacraftsIoSkeleton
       def included(klass)
         Extensions.all.each do |extension|
           kwargs = extract_option_params(extension)
-          klass.public_send(:method_option, extension.option_name, **kwargs)
+          klass.method_option(extension.option_name, **kwargs)
         end
       end
 
       private
 
       def extract_option_params(extension)
-        banner = extension.type == :string ? "{#{extension.possible_values&.join(',')}}" : nil
-
         {
+          enum: extension.possible_values,
           aliases: extension.aliases,
           type: extension.type,
           desc: extension.desc,
           default: extension.default_value,
-          banner: banner,
-          hide: extension.hidden
+          hide: extension.hidden,
+          lazy_default: extension.type == :array ? extension.default_value : nil
         }
       end
     end
