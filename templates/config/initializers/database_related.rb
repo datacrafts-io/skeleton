@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveRecord::Base.dump_schema_after_migration = Rails.env.development?
 StrongMigrations.auto_analyze = Rails.env.development?
 
