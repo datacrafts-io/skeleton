@@ -4,27 +4,27 @@ module DatacraftsIoSkeleton
   module Extensions
     module Rails
       class App
-        include ExtensionBase
+        include Base
 
         hide_from_options!
 
         before :rails do
-          Gemfiler.add("rubocop", group: :development, required: false)
-          Gemfiler.add("rubocop-performance", group: :development, required: false)
-          Gemfiler.add("rubocop-rails", group: :development, required: false)
-          Gemfiler.add("rubocop-faker", group: :development, required: false)
+          Tools::Gemfiler.add("rubocop", group: :development, required: false)
+          Tools::Gemfiler.add("rubocop-performance", group: :development, required: false)
+          Tools::Gemfiler.add("rubocop-rails", group: :development, required: false)
+          Tools::Gemfiler.add("rubocop-faker", group: :development, required: false)
 
-          Gemfiler.add("faker", group: :development_test)
-          Gemfiler.add("rspec", group: :development_test)
-          Gemfiler.add("rspec-rails", group: :development_test)
-          Gemfiler.add("rubocop-rspec", group: :development_test, required: false)
+          Tools::Gemfiler.add("faker", group: :development_test)
+          Tools::Gemfiler.add("rspec", group: :development_test)
+          Tools::Gemfiler.add("rspec-rails", group: :development_test)
+          Tools::Gemfiler.add("rubocop-rspec", group: :development_test, required: false)
 
-          Gemfiler.add("database_cleaner-active_record", group: :test)
-          Gemfiler.add("factory_bot_rails", group: :test)
-          Gemfiler.add("simplecov", group: :test, required: false)
-          Gemfiler.add("shoulda-matchers", group: :test)
+          Tools::Gemfiler.add("database_cleaner-active_record", group: :test)
+          Tools::Gemfiler.add("factory_bot_rails", group: :test)
+          Tools::Gemfiler.add("simplecov", group: :test, required: false)
+          Tools::Gemfiler.add("shoulda-matchers", group: :test)
 
-          Gemfiler.uncomment_default_gems "rack-cors"
+          Tools::Gemfiler.uncomment_default_gems "rack-cors"
         end
 
         after :rails do

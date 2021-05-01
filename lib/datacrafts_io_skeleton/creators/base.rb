@@ -2,44 +2,45 @@
 
 module DatacraftsIoSkeleton
   module Creators
-    class Base < ::Thor
-      include ::Thor::Actions
-      include Helpers
+    class Base < ThorObject
+      Tools = DatacraftsIoSkeleton::Tools
 
-      source_root "#{Config::ROOT_PATH}/templates"
+      source_root Config::TEMPLATES_PATH
 
-      attr_reader :app_name, :options, :before_procs, :after_procs, :target
+      attr_reader :current_answer, :current_extension
 
       class << self
         def create(*args)
-          instance = new(*args)
-          instance.before_actions
-          instance.process!
-          instance.after_actions
+          new(*args).call
         end
       end
 
       no_commands do
-        def initialize(app_name, options)
-          super([], {}, destination_root: app_name)
-
-          @app_name = app_name
-          @options = options
-          @before_procs = ProcContainer.extract(target: target, type: :before, options: options)
-          @after_procs = ProcContainer.extract(target: target, type: :after, options: options)
+        def call
+          before_actions
+          process!
+          after_actions
         end
 
-        def before_actions
-          run_procs(before_procs)
+        protected
+
+        def when_answer(*answers)
+          answers.map!(&:to_s)
+
+          yield if block_given? && correct_answer?(answers)
         end
 
-        def after_actions
-          run_procs(after_procs)
+        def before_procs
+          @before_procs ||=
+            ProcContainer.extract(target: target, type: :before)
         end
 
-        def process!
-          raise NotImplementedError
+        def after_procs
+          @after_procs ||=
+            ProcContainer.extract(target: target, type: :after)
         end
+
+        def process!; end
 
         def target
           raise NotImplementedError
@@ -47,9 +48,44 @@ module DatacraftsIoSkeleton
 
         private
 
+        def before_actions
+          run_procs(before_procs)
+        end
+
+        def after_actions
+          run_procs(after_procs)
+          say_status_after
+        end
+
+        def say_status_after; end
+
         def run_procs(procs)
           procs.each do |item|
-            instance_exec(&item[:block])
+            @current_extension = item[:extension]
+            @current_answer = options[current_extension.option_name]
+
+            instance_exec(&item[:block]) if acceptable_answer?
+
+            @current_extension = @current_answer = nil
+          end
+        end
+
+        def correct_answer?(cases)
+          if current_extension.type == :array
+            (current_answer & cases).any?
+          else
+            cases.include?(current_answer)
+          end
+        end
+
+        def acceptable_answer?
+          case current_extension.type
+          when :array
+            !current_answer.nil?
+          when :boolean
+            current_answer == true
+          else
+            current_extension.hidden || !current_answer.empty?
           end
         end
       end

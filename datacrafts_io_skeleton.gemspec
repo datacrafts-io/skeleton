@@ -8,8 +8,10 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Roman Ovcharov", "Alexey Melnikov", "Andrey Kurashev"]
   spec.email         = ["hello@datacrafts.io"]
 
-  spec.summary       = "Simple gem for fast rails apps creation."
-  spec.description   = spec.summary
+  spec.summary       = "Simple gem for fast Rails apps creation"
+  spec.description   = <<~TEXT
+    Create your own Rails application with ready built-in libs, configs and frontend frameworks
+  TEXT
   spec.homepage      = "https://github.com/datacrafts-io/skeleton"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.7.0")
@@ -29,8 +31,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "bundler", "~> 2.2.16"
+  spec.add_dependency "paint", "~> 2.2.1"
   spec.add_dependency "rails", "~> 6.1.3"
   spec.add_dependency "thor", "~> 1.0.1"
+  spec.add_dependency "whirly", "~> 0.2.6"
 
-  spec.add_development_dependency "rubocop"
+  spec.add_development_dependency "pry", "~> 0.14.1"
+  spec.add_development_dependency "rubocop", "~> 1.13.0"
 end

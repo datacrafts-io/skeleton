@@ -10,22 +10,43 @@ Install this gem as follow:
 
 ## Usage
 
-### New Rails API application without frontend part.
+This command will create new Rails app with configured extensions, rails_helper.rb for RSpec and .rubocop.yml.
+All major gems are also included.
 
-This command will create new rails app with configured rails_helper.rb and .rubocop.yml files. All major gems are also included.
+    $ datacrafts-io-skeleton create APP_NAME [EXTENSIONS]
 
-    $ datacrafts-io-skeleton create APP_NAME
-    $ datacrafts-io-skeleton build APP_NAME
-    $ datacrafts-io-skeleton new APP_NAME
+Use `help` to get the list of extensions allowed to install
+```
+$ datacrafts-io-skeleton help create
+  Usage:
+    datacrafts-io-skeleton create APP_NAME
+
+  Options:
+    r, [--react=one two three]                      # Adds React.js to your project
+                                                    # Possible values: typescript
+    v, [--vue=one two three]                        # Adds Vue.js to your project
+                                                    # Possible values:
+                                                      typescript, eslint, router,
+                                                      pwa, vuex, jest
+    d, [--database=DATABASE]                        # Select type of database for your app
+                                                    # Default: postgresql
+                                                    # Possible values:
+                                                      mysql, postgresql,
+                                                      sqlite3, oracle, sqlserver,
+                                                      jdbcmysql, jdbcsqlite3,
+                                                      jdbcpostgresql, jdbc
+    i, [--dry-initializer], [--no-dry-initializer]  # Adds dry-initializer to your config
+                                                    # Default: true
+
+  Create you own best Rails/JS app
+```
     
-### With frontend part.
+## Extensions
 
-You can specify `--frontend (-f) FRONTEND_TYPE` option to additionally create frontend application inside `APP_NAME/frontend` directory. Use `-t` option to add typescript support.
-
-    $ datacrafts-io-skeleton create APP_NAME --frontend react -t 
-
-Allowed frontend types include only `react` for now.
-
+1. `--dry-initializer` ([Dry::Initializer](https://dry-rb.org/gems/dry-initializer/3.0/)):  adds gem to Rails Gemfile, creates basic ApplicationService.
+2. `--database`: in case of `postgresql` and `mysql` installs additional gems with initializers and config files ([strong_migrations](https://github.com/ankane/strong_migrations), [activerecord-clean-db-structure](https://github.com/lfittl/activerecord-clean-db-structure), and [activerecord-safer_migrations](https://github.com/gocardless/activerecord-safer_migrations))
+3. `--vue`: creates Vue.js frontend application inside `${APP_DIR}/frontend` with selected plugins
+3. `--react`: creates React.js frontend application inside `${APP_DIR}/frontend` with selected plugins
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
