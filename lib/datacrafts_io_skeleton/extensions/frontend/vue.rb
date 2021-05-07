@@ -10,7 +10,7 @@ module DatacraftsIoSkeleton
 
         use_option_name "vue", aliases: :v
 
-        use_possible_values %i[typescript eslint router pwa vuex jest], default: nil, type: :array
+        use_possible_values %i[typescript eslint router pwa vuex jest], default: [], type: :array
 
         use_desc "Adds Vue.js to your project"
 

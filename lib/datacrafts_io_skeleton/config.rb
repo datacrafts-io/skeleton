@@ -6,8 +6,14 @@ module DatacraftsIoSkeleton
 
     TEMPLATES_PATH = "#{ROOT_PATH}/templates"
 
-    def self.DEST_PATH(app_name) # rubocop:disable Naming/MethodName
-      File.join(File.expand_path(Dir.pwd), app_name)
+    class << self
+      def DEST_PATH(app_name) # rubocop:disable Naming/MethodName
+        File.join(File.expand_path(Dir.pwd), app_name)
+      end
+
+      def verbose?
+        ENV.key?("VERBOSE")
+      end
     end
   end
 end

@@ -79,14 +79,7 @@ module DatacraftsIoSkeleton
         end
 
         def acceptable_answer?
-          case current_extension.type
-          when :array
-            !current_answer.nil?
-          when :boolean
-            current_answer == true
-          else
-            current_extension.hidden || !current_answer.empty?
-          end
+          Tools::AnswerCheck.call(current_extension, current_answer)
         end
       end
     end

@@ -8,6 +8,10 @@ module DatacraftsIoSkeleton
       no_commands do
         protected
 
+        def process!
+          CliLoader.status = "Creating frontend application"
+        end
+
         def target
           :frontend
         end

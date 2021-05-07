@@ -9,7 +9,7 @@ module DatacraftsIoSkeleton
         protected
 
         def process!
-          Whirly.status = "Creating Rails application"
+          CliLoader.status = "Creating Rails application"
 
           inside destination_root do
             template "rails.rb.erb", "rails.rb"

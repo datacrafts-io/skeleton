@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "json"
-
 module DatacraftsIoSkeleton
   module Extensions
     module Frontend
@@ -10,21 +8,17 @@ module DatacraftsIoSkeleton
 
         use_option_name "react", aliases: :r
 
-        use_possible_values %i[typescript], default: nil, type: :array
+        use_possible_values type: :string, default: "cra-template", allow_blank: true
 
-        use_desc "Adds React.js to your project"
+        use_desc "Adds React.js to your project with selected template. Check available templates at https://www.npmjs.com/search?q=cra-template-*"
 
         before :frontend do
           ensure_yarn_installed!
         end
 
         process :frontend do
-          when_answer :typescript do
-            Tools::React.add_plugin("typescript")
-          end
-
           inside destination_root do
-            run "yarn create react-app frontend #{Tools::React.to_config}"
+            run "yarn create react-app frontend --template #{current_answer}"
           end
         end
       end

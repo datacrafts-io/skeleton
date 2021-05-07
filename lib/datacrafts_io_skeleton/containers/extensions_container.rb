@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module DatacraftsIoSkeleton
-  module Extensions
+  module ExtensionsContainer
     class << self
       def all
         @all ||= extract_extensions_recursive(Extensions)
