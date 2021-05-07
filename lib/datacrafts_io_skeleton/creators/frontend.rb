@@ -6,6 +6,10 @@ module DatacraftsIoSkeleton
       source_root Config::TEMPLATES_PATH
 
       no_commands do
+        def initialize(app_name, options)
+          super([app_name], options, destination_root: Config::DEST_PATH(app_name, "frontend"))
+        end
+
         protected
 
         def process!
@@ -21,7 +25,7 @@ module DatacraftsIoSkeleton
         end
 
         def say_status_after
-          say "Your frontend app has been successfully created at ./#{app_name}/frontend"
+          say "Your frontend app has been successfully created at ./#{destination_root}"
         end
       end
     end

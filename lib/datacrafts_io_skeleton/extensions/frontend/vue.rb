@@ -42,9 +42,13 @@ module DatacraftsIoSkeleton
 
           inside destination_root do
             run <<~CMD
-              vue create frontend -i '#{Tools::Vue.to_config}'
+              yes | vue create . -i '#{Tools::Vue.to_config}'
             CMD
           end
+        end
+
+        after :frontend do
+          ensure_dotenv_created!
         end
       end
     end

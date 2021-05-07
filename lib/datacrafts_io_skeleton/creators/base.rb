@@ -46,6 +46,10 @@ module DatacraftsIoSkeleton
           raise NotImplementedError
         end
 
+        def ensure_dotenv_created!
+          run "touch #{destination_root}/.env"
+        end
+
         private
 
         def before_actions

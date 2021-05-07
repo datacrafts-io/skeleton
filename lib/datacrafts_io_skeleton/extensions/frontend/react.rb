@@ -18,8 +18,12 @@ module DatacraftsIoSkeleton
 
         process :frontend do
           inside destination_root do
-            run "yarn create react-app frontend --template #{current_answer}"
+            run "yarn create react-app . --template #{current_answer}"
           end
+        end
+
+        after :frontend do
+          ensure_dotenv_created!
         end
       end
     end

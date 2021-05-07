@@ -27,7 +27,7 @@ module DatacraftsIoSkeleton
         end
 
         def say_status_after
-          say "Your Rails app has been successfully created at ./#{app_name}"
+          say "Your Rails app has been successfully created at #{destination_root}"
         end
       end
     end

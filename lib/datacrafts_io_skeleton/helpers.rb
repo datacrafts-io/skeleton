@@ -7,7 +7,7 @@ module DatacraftsIoSkeleton
     end
 
     # add verbose: false to methods to prevent Thor print the description of them
-    %i[copy_file remove_file append_to_file empty_directory template].each do |method_name|
+    %i[directory copy_file remove_file append_to_file empty_directory template].each do |method_name|
       define_method(method_name) do |*args, **kwargs, &block|
         super(*args, verbose: Config.verbose?, **kwargs, &block)
       end

@@ -7,8 +7,8 @@ module DatacraftsIoSkeleton
     TEMPLATES_PATH = "#{ROOT_PATH}/templates"
 
     class << self
-      def DEST_PATH(app_name) # rubocop:disable Naming/MethodName
-        File.join(File.expand_path(Dir.pwd), app_name)
+      def DEST_PATH(*rel_path) # rubocop:disable Naming/MethodName
+        File.join(File.expand_path(Dir.pwd), *rel_path)
       end
 
       def verbose?
