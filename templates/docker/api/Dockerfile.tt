@@ -1,0 +1,15 @@
+FROM ruby:<%= RUBY_VERSION %>
+
+COPY docker/api/prepare-rails.sh /usr/bin/
+RUN chmod +x /usr/bin/prepare-rails.sh
+
+COPY docker/api/entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+
+RUN /usr/bin/prepare-rails.sh
+
+USER dockeruser
+
+WORKDIR /app
+
+ENTRYPOINT ["/usr/bin/entrypoint.sh"]

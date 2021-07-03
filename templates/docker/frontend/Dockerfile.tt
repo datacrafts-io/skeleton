@@ -1,0 +1,8 @@
+FROM node:<%= `node -v`.strip.gsub(/[A-Za-z]/, '').split(".").first %>
+
+COPY docker/frontend/entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+
+WORKDIR /app
+
+ENTRYPOINT ["/usr/bin/entrypoint.sh"]

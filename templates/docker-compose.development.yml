@@ -1,0 +1,22 @@
+version: '3'
+services:
+  db:
+    image: postgres:11-alpine
+    volumes:
+      - ./docker/db/data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+
+  api:
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+
+  frontend:
+    ports:
+      - 8080:8080
+    volumes:
+      - ./frontend:/app

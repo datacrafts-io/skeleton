@@ -10,7 +10,7 @@ module DatacraftsIoSkeleton
 
         use_option_name "vue", aliases: :v
 
-        use_possible_values %i[typescript eslint router pwa vuex jest], default: nil, type: :array
+        use_possible_values %i[typescript eslint router pwa vuex jest], default: [], type: :array
 
         use_desc "Adds Vue.js to your project"
 
@@ -42,9 +42,13 @@ module DatacraftsIoSkeleton
 
           inside destination_root do
             run <<~CMD
-              vue create frontend -i '#{Tools::Vue.to_config}'
+              yes | vue create . -i '#{Tools::Vue.to_config}'
             CMD
           end
+        end
+
+        after :frontend do
+          ensure_dotenv_created!
         end
       end
     end

@@ -28,6 +28,7 @@ module DatacraftsIoSkeleton
         end
 
         after :rails do
+          ensure_dotenv_created!
           template "rubocop.yml.erb", ".rubocop.yml"
           remove_file "spec/rails_helper.rb"
           copy_file "spec/rails_helper.rb"
