@@ -27,7 +27,7 @@ module DatacraftsIoSkeleton
 
     def create(app_name)
       say <<~DESC
-        Skeleton in creating your best Rails/JS application.
+        Skeleton is creating your best Rails/JS application.
         If you have some issues with creation please use VERBOSE=true
       DESC
 
