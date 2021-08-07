@@ -10,8 +10,10 @@ module DatacraftsIoSkeleton
     attr_reader :app_name, :options
 
     no_commands do
-      def initialize(app_name, options)
-        super([app_name], options, destination_root: Config::DEST_PATH(app_name))
+      def initialize(app_name, options, destination_root: nil)
+        destination_root ||= Config::DEST_PATH(app_name)
+
+        super([app_name], options, destination_root: destination_root)
 
         @app_name = app_name
         @options = options

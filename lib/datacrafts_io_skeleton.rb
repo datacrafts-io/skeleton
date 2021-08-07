@@ -2,12 +2,12 @@
 
 require "pry"
 require "thor"
-require "whirly"
+
 require "datacrafts_io_skeleton/version"
 require "datacrafts_io_skeleton/helpers"
+require "datacrafts_io_skeleton/cli_loader"
 require "datacrafts_io_skeleton/config"
 require "datacrafts_io_skeleton/thor_object"
-require "datacrafts_io_skeleton/extensions"
 require "datacrafts_io_skeleton/options_extractor"
 
 %w[containers extensions tools creators].each do |folder|
@@ -20,12 +20,18 @@ module DatacraftsIoSkeleton
     include OptionsExtractor
     include Helpers
 
-    desc "create APP_NAME", "Create you own best Rails/JS app"
+    desc "create APP_NAME", <<~DESC
+      Create your own best Rails/JS app.
+      If you have some issues with creation please use VERBOSE=true
+    DESC
 
     def create(app_name)
-      say "Skeleton in creating your best Rails/JS application \n"
+      say <<~DESC
+        Skeleton is creating your best Rails/JS application.
+        If you have some issues with creation please use VERBOSE=true
+      DESC
 
-      Whirly.start spinner: "bouncingBall", color_change_rate: 0, color: "blue" do
+      CliLoader.start do
         CreatorsContainer.new(app_name, options).call
       end
     end
