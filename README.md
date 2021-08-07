@@ -8,23 +8,70 @@ Install this gem as follow:
 
     $ gem install datacrafts-io-skeleton
 
+
 ## Usage
 
-### New Rails API application without frontend part.
+This command will create new Rails app with configured extensions, rails_helper.rb for RSpec and .rubocop.yml.
+All major gems are also included.
 
-This command will create new rails app with configured rails_helper.rb and .rubocop.yml files. All major gems are also included.
+    $ datacrafts-io-skeleton create APP_NAME [EXTENSIONS]
 
-    $ datacrafts-io-skeleton create APP_NAME
-    $ datacrafts-io-skeleton build APP_NAME
-    $ datacrafts-io-skeleton new APP_NAME
-    
-### With frontend part.
+Use `help` to get the list of extensions allowed to install
+```
+$ datacrafts-io-skeleton help create
+  Usage:
+    datacrafts-io-skeleton create APP_NAME
 
-You can specify `--frontend (-f) FRONTEND_TYPE` option to additionally create frontend application inside `APP_NAME/frontend` directory. Use `-t` option to add typescript support.
+  Options:
+    r, [--react=one two three]                      # Adds React.js to your project
+                                                    # Possible values: typescript
+    v, [--vue=one two three]                        # Adds Vue.js to your project
+                                                    # Possible values:
+                                                      typescript, eslint, router,
+                                                      pwa, vuex, jest
+    d, [--database=DATABASE]                        # Select type of database for your app
+                                                    # Default: postgresql
+                                                    # Possible values:
+                                                      mysql, postgresql,
+                                                      sqlite3, oracle, sqlserver,
+                                                      jdbcmysql, jdbcsqlite3,
+                                                      jdbcpostgresql, jdbc
+    c, [--dockerize], [--no-dockerize]              # Wraps your application to docker containers w/ docker-compose
+    i, [--dry-initializer], [--no-dry-initializer]  # Adds dry-initializer to your config
+                                                    # Default: true
 
-    $ datacrafts-io-skeleton create APP_NAME --frontend react -t 
+  Create you own best Rails/JS app
+```
 
-Allowed frontend types include only `react` for now.
+## Extensions
+
+1. `--dry-initializer` ([Dry::Initializer](https://dry-rb.org/gems/dry-initializer/3.0/)):  adds gem to Rails Gemfile, creates basic ApplicationService.
+2. `--database`: in case of `postgresql` and `mysql` installs additional gems with initializers and config files ([strong_migrations](https://github.com/ankane/strong_migrations), [activerecord-clean-db-structure](https://github.com/lfittl/activerecord-clean-db-structure), and [activerecord-safer_migrations](https://github.com/gocardless/activerecord-safer_migrations))
+3. `--vue`: creates Vue.js frontend application inside `${APP_DIR}/frontend` with selected plugins
+4. `--react`: creates React.js frontend application inside `${APP_DIR}/frontend` from choosen template
+5. `--dockerize`: wraps your applications to docker containers using `docker` and `docker-compose`
+
+---
+**Note that for `Rails` you're need installed `ruby`**
+
+**For frontend frameworks - `Node.js`**
+
+**For Dockerizing - `docker` w/ `docker-compose`**
+
+---
+
+## Examples
+
+    $ datacrafts-io-skeleton create awesome --database=sqlite3 --vue --dry-initializer
+> Will create Rails application inside `awesome` directory with gems and adapters for `sqlite3`, gem `dry-initializer` with base `ApplicationService` inside `app/services` directory and also creates Vue.js application inside `awesome/frontend` with default config (no plugins passed).
+
+
+    $ datacrafts-io-skeleton create awesome --database=postgresql --vue=jest typescript eslint --no-dry-initializer
+> Will create Rails application inside `awesome` directory with gems and adapters for `Postgres`, adds gems for migrations and database health, skips installing `dry-initializer` and creates Vue.js app inside `awesome/frontend` with Jest, Typescript and ESlint.
+
+    $ datacrafts-io-skeleton create awesome --database=mysql --react=typescript --dockerize
+> Will create Rails application inside `awesome` directory with gems and adapters for `MySQL`, adds gems for migrations and database health, installs `dry-initializer` with basic `ApplicationService` and creates React.js app inside `awesome/frontend` from template [`cra-template-typescript`](https://www.npmjs.com/package/cra-template-typescript). In addition it will create `docker` directory with Dockerfiles and entrypoints for containers and `docker-compose.yml` in root so you'll need only update `.env`, `database.yml` and run `docker-compose up`.
+
 
 ## Development
 

@@ -1,23 +1,20 @@
-require "thor"
+# frozen_string_literal: true
 
 module DatacraftsIoSkeleton
-  # Shared logic.
   module Helpers
-    # Defines gem templates folder which you can use to load template to the new app.
-    TEMPLATES_DIR = "#{File.dirname(__FILE__)}/../../templates".freeze
+    def commit(message)
+      run "git add . && git commit -m '#{message}'"
+    end
 
-    def self.included(klass)
-      klass.class_eval do
-        include Thor::Actions
+    # add verbose: false to methods to prevent Thor print the description of them
+    %i[directory copy_file remove_file append_to_file empty_directory template].each do |method_name|
+      define_method(method_name) do |*args, **kwargs, &block|
+        super(*args, verbose: Config.verbose?, **kwargs, &block)
       end
     end
 
-    def commit(message, app_path=app)
-      run "cd #{app_path} && git add . && git commit -m '#{message}'"
-    end
-
-    def app(path=nil)
-      "#{@app_name}/#{path}"
+    def run(*args, **kwargs)
+      super(*args, verbose: Config.verbose?, capture: !Config.verbose?, **kwargs)
     end
   end
 end
