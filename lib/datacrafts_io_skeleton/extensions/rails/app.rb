@@ -38,7 +38,7 @@ module DatacraftsIoSkeleton
         end
 
         after :all do
-          append_to_file ".gitignore", "/.idea/"
+          append_to_file ".gitignore", ".idea/\n"
 
           inside destination_root do
             run "bundle exec rubocop -A"

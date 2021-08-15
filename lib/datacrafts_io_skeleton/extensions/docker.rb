@@ -19,7 +19,7 @@ module DatacraftsIoSkeleton
           template "docker-compose.development.yml"
           template "docker-compose.development.yml", "docker-compose.override.yml"
 
-          append_to_file ".gitignore", "/.docker-compose.override.yml"
+          append_to_file ".gitignore", "docker-compose.override.yml\n"
         end
       end
     end
